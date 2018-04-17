@@ -11,9 +11,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/granite-qrcode-generator/granite-qrcode-generator.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="shared-styles.html">
 
-<dom-module id="qr-generator">
+<dom-module id="app-tools">
   <template>
     <style include="shared-styles">
       :host {
@@ -26,7 +27,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         flex-grow: .25;
       }
 
+      .card>div {
+        @apply(--layout-horizontal);
+      }
+
+      .card paper-input {
+        @apply(--layout-flex);
+        margin: 0 1rem 0 0;
+      }
+
       .card .center {
+        display: block;
         margin: 1rem 0 0;
         text-align: center;
         width: 100%;
@@ -38,18 +49,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <div class="card">
+      <h4>QR-Code Generator</h4>
       <div>
-        <paper-input label="MAC Address" value="{{_macAddress}}"></paper-input>
+        <paper-input label="MAC Address" value="{{_macAddress}}" no-label-float></paper-input>
+        <paper-icon-button icon="my-icons:menu" on-tap="_downloadImage" drawer-toggle></paper-icon-button>
       </div>
       <div class="center">
-        <granite-qrcode-generator class="qr-code-generator" data="[[_qrData]]" mode="alphanumeric" auto></granite-qrcode-generator>
+        <granite-qrcode-generator id="qrGenerator" class="qr-code-generator" data="[[_qrData]]" mode="alphanumeric" format="png"
+          auto></granite-qrcode-generator>
       </div>
     </div>
   </template>
 
   <script>
-    class QrGenerator extends Polymer.Element {
-      static get is() { return 'qr-generator'; }
+    class appTools extends Polymer.Element {
+      static get is() { return 'app-tools'; }
       static get properties() {
         return {
           _macAddress: {
@@ -66,8 +80,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _onMacChange(macAddress) {
         this.set('_qrData', macAddress);
       }
+      _downloadImage() {
+        var url = this.$.qrGenerator.$$('img').src.replace(/^data:image\/[^;]+/, 'data:application/octet-stream');
+        window.open(url);
+      }
     }
 
-    window.customElements.define(QrGenerator.is, QrGenerator);
+    window.customElements.define(appTools.is, appTools);
   </script>
 </dom-module>
