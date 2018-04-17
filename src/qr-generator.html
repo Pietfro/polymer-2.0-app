@@ -17,14 +17,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
     <style include="shared-styles">
       :host {
-        display: block;
+        @apply(--layout-horizontal);
         padding: 10px;
+      }
+
+      .card {
+        @apply(--layout-flex);
+        flex-grow: .25;
+      }
+
+      .card .center {
+        margin: 1rem 0 0;
+        text-align: center;
+        width: 100%;
+      }
+
+      .qr-code-generator {
+        display: inline-block;
       }
     </style>
 
     <div class="card">
-      <paper-input label="MAC Address" value="{{_macAddress}}"></paper-input>
-      <granite-qrcode-generator data="[[_qrData]]" mode="alphanumeric" auto></granite-qrcode-generator>
+      <div>
+        <paper-input label="MAC Address" value="{{_macAddress}}"></paper-input>
+      </div>
+      <div class="center">
+        <granite-qrcode-generator class="qr-code-generator" data="[[_qrData]]" mode="alphanumeric" auto></granite-qrcode-generator>
+      </div>
     </div>
   </template>
 
