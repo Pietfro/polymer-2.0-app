@@ -24,7 +24,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       .card {
         @apply(--layout-flex);
-        flex-grow: .25;
+        flex-grow: var(--grid-flex-grow);
       }
 
       .card>div {
@@ -52,7 +52,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <h4>QR-Code Generator</h4>
       <div>
         <paper-input label="MAC Address" value="{{_macAddress}}" no-label-float></paper-input>
-        <paper-icon-button icon="my-icons:menu" on-tap="_downloadImage" drawer-toggle></paper-icon-button>
+        <paper-icon-button icon="app-icons:menu" on-tap="_downloadImage" drawer-toggle></paper-icon-button>
       </div>
       <div class="center">
         <granite-qrcode-generator id="qrGenerator" class="qr-code-generator" data="[[_qrData]]" mode="alphanumeric" format="png"
