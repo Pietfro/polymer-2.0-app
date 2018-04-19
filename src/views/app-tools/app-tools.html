@@ -12,6 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../../bower_components/granite-qrcode-generator/granite-qrcode-generator.html">
 <link rel="import" href="../../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../components/app-icons/app-icons.html">
 <link rel="import" href="../../shared-styles.html">
 
 <dom-module id="app-tools">
@@ -52,7 +53,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <h4>QR-Code Generator</h4>
       <div>
         <paper-input label="MAC Address" value="{{_macAddress}}" no-label-float></paper-input>
-        <paper-icon-button icon="app-icons:menu" on-tap="_downloadImage" drawer-toggle></paper-icon-button>
+        <paper-icon-button icon="file-download" on-tap="_downloadImage" drawer-toggle></paper-icon-button>
       </div>
       <div class="center">
         <granite-qrcode-generator id="qrGenerator" class="qr-code-generator" data="[[_qrData]]" mode="alphanumeric" format="png"
